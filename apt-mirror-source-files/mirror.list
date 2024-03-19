@@ -1,0 +1,77 @@
+set base_path         /var/spool/apt-mirror
+set mirror_path       $base_path/mirror
+set skel_path         $base_path/skel
+set var_path          $base_path/var
+set postmirror_script $var_path/postmirror.sh
+set defaultarch       amd64
+set run_postmirror    0
+set nthreads          6
+set limit_rate        100m
+set _tilde            0
+# Use --unlink with wget (for use with hardlinked directories)
+set unlink            1
+set use_proxy         off
+set http_proxy        127.0.0.1:3128
+set proxy_user        user
+set proxy_password    password
+
+deb http://ftp.halifax.rwth-aachen.de/ubuntu jammy           main restricted universe multiverse
+deb http://ftp.halifax.rwth-aachen.de/ubuntu jammy-updates   main restricted universe multiverse
+deb http://ftp.halifax.rwth-aachen.de/ubuntu jammy-security  main restricted universe multiverse
+deb http://ftp.halifax.rwth-aachen.de/ubuntu jammy-backports main restricted universe multiverse
+
+deb [arch=i386] http://ftp.halifax.rwth-aachen.de/ubuntu jammy           main restricted universe multiverse
+deb [arch=i386] http://ftp.halifax.rwth-aachen.de/ubuntu jammy-updates   main restricted universe multiverse
+deb [arch=i386] http://ftp.halifax.rwth-aachen.de/ubuntu jammy-security  main restricted universe multiverse
+deb [arch=i386] http://ftp.halifax.rwth-aachen.de/ubuntu jammy-backports main restricted universe multiverse
+
+clean http://ftp.halifax.rwth-aachen.de/ubuntu
+
+deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports jammy multiverse
+deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports jammy-updates multiverse
+deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports jammy main restricted
+deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports jammy universe
+deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports jammy-updates universe
+deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports jammy-backports main restricted universe multiverse
+
+deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports jammy multiverse
+deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports jammy-updates multiverse
+deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports jammy main restricted
+deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports jammy universe
+deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports jammy-updates universe
+deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports jammy-backports main restricted universe multiverse
+clean http://ports.ubuntu.com/ubuntu-ports
+
+deb http://mirror.i3d.net/debian bookworm main contrib non-free non-free-firmware
+deb http://mirror.i3d.net/debian bookworm-updates main contrib non-free non-free-firmware
+deb [arch=arm64] http://mirror.i3d.net/debian bookworm main contrib non-free non-free-firmware
+deb [arch=arm64] http://mirror.i3d.net/debian bookworm-updates main contrib non-free non-free-firmware
+deb [arch=armhf] http://mirror.i3d.net/debian bookworm main contrib non-free non-free-firmware
+deb [arch=armhf] http://mirror.i3d.net/debian bookworm-updates main contrib non-free non-free-firmware
+
+deb http://mirror.i3d.net/debian bullseye main contrib non-free
+deb http://mirror.i3d.net/debian bullseye-updates main contrib non-free
+deb [arch=arm64] http://mirror.i3d.net/debian bullseye main contrib non-free
+deb [arch=arm64] http://mirror.i3d.net/debian bullseye-updates main contrib non-free
+deb [arch=armhf] http://mirror.i3d.net/debian bullseye main contrib non-free
+deb [arch=armhf] http://mirror.i3d.net/debian bullseye-updates main contrib non-free
+
+clean  http://mirror.i3d.net/debian
+
+#deb http://pkgs.tailscale.com/stable/ubuntu jammy main
+deb [arch=arm64] http://archive.raspberrypi.com/debian bookworm main
+deb [arch=armhf] http://archive.raspberrypi.com/debian bookworm main
+deb [arch=arm64] http://archive.raspberrypi.com/debian bullseye main
+deb [arch=armhf] http://archive.raspberrypi.com/debian bullseye main
+
+
+
+# ==
+# Example of other repos
+# ==
+
+# deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main
+# deb http://download.docker.com/linux/ubuntu jammy stable
+# deb [arch=arm64] http://download.docker.com/linux/ubuntu jammy stable
+
+# deb http://apt.kubernetes.io kubernetes-bionic main

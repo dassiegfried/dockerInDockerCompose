@@ -1,0 +1,74 @@
+version: '3.5'
+services:
+  mediathekview:
+    build: 
+          context: .
+          dockerfile: mediathek.Dockerfile
+    container_name: mediathekview
+    ports:
+      - "5800:5800"
+    volumes:
+      - "/did/mediathek:/config:rw"
+      - "/mnt/hdds/media/mediathek:/output:rw"
+    environment:
+       - "USER_ID=568"
+       - "GROUP_ID=568"
+  mirror:
+      build: 
+          context: .
+          dockerfile: apt-mirror.Dockerfile
+      command: bash -c "apt-mirror && bash /apt-mirror/postmirror.sh"
+      volumes:
+          - "/did/mirror/mirror:/var/spool/apt-mirror"  
+  server:
+      build:
+          context: .
+          dockerfile: nginx.Dockerfile
+      restart: always
+      command: [nginx-debug, '-g', 'daemon off;']
+      volumes:
+          - "/did/mirror/mirror/mirror:/mirror:ro"
+      ports:
+          - "8080:80"
+  p2pool:
+    image: ghcr.io/sethforprivacy/p2pool:latest
+    restart: unless-stopped
+    container_name: p2pool
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    tty: true
+    stdin_open: true
+    volumes:
+      - /did/p2pool:/home/p2pool
+      - /dev/hugepages:/dev/hugepages:rw
+    ports:
+      - 3333:3333
+      - 37889:37889
+    command: >-
+      --wallet "43Ye68LVLqsbss35nQH3LdP6j5R1kziDDcFHWeB93VDTUtQDsc2PBe3dowrVjZa8M1Z7Jx3ysBEbd2nnneN9A86224bpDKv"
+      --stratum "0.0.0.0:3333" --p2p "0.0.0.0:37889" --zmq-port "18084"
+      --loglevel "0" --addpeers "65.21.227.114:37889,node.sethforprivacy.com:37889"
+      --host "p2pmd.xmrvsbeast.com" --mini
+  monerod:
+    image: ghcr.io/sethforprivacy/simple-monerod:latest
+    restart: unless-stopped
+    container_name: monerod
+    user: ${FIXUID:-1000}:${FIXGID:-1000}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    volumes:
+      - /did/bitmonero:/home/monero
+    ports:
+      - 18080:18080
+      - 18084:18084
+      - 18089:18089
+    command: >-
+      --rpc-restricted-bind-ip=0.0.0.0 --rpc-restricted-bind-port=18089
+      --public-node --no-igd --enable-dns-blocklist --prune-blockchain
+      --zmq-pub=tcp://0.0.0.0:18084 --in-peers=50 --out-peers=50
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 30
+    restart: always
