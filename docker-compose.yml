@@ -49,23 +49,23 @@ services:
       --stratum "0.0.0.0:3333" --p2p "0.0.0.0:37889" --zmq-port "18084"
       --loglevel "0" --addpeers "65.21.227.114:37889,node.sethforprivacy.com:37889"
       --host "p2pmd.xmrvsbeast.com" --mini
-  monerod:
-    image: ghcr.io/sethforprivacy/simple-monerod:latest
-    restart: unless-stopped
-    container_name: monerod
-    user: ${FIXUID:-1000}:${FIXGID:-1000}
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-    volumes:
-      - /did/bitmonero:/home/monero
-    ports:
-      - 18080:18080
-      - 18084:18084
-      - 18089:18089
-    command: >-
-      --rpc-restricted-bind-ip=0.0.0.0 --rpc-restricted-bind-port=18089
-      --public-node --no-igd --enable-dns-blocklist --prune-blockchain
-      --zmq-pub=tcp://0.0.0.0:18084 --in-peers=50 --out-peers=50
+#  monerod:
+#    image: ghcr.io/sethforprivacy/simple-monerod:latest
+#    restart: unless-stopped
+#    container_name: monerod
+#    user: ${FIXUID:-1000}:${FIXGID:-1000}
+#    labels:#
+#      - "com.centurylinklabs.watchtower.enable=true"
+#    volumes:
+#      - /did/bitmonero:/home/monero
+#    ports:
+#      - 18080:18080
+#      - 18084:18084
+#      - 18089:18089
+#    command: >-
+#      --rpc-restricted-bind-ip=0.0.0.0 --rpc-restricted-bind-port=18089
+#      --public-node --no-igd --enable-dns-blocklist --prune-blockchain
+#      --zmq-pub=tcp://0.0.0.0:18084 --in-peers=50 --out-peers=50
   watchtower:
     image: containrrr/watchtower
     volumes:
