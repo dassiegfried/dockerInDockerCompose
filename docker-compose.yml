@@ -49,26 +49,41 @@ services:
       --stratum "0.0.0.0:3333" --p2p "0.0.0.0:37889" --zmq-port "18084"
       --loglevel "0" --addpeers "65.21.227.114:37889,node.sethforprivacy.com:37889"
       --host "p2pmd.xmrvsbeast.com" --mini
-#  monerod:
-#    image: ghcr.io/sethforprivacy/simple-monerod:latest
-#    restart: unless-stopped
-#    container_name: monerod
-#    user: ${FIXUID:-1000}:${FIXGID:-1000}
-#    labels:#
-#      - "com.centurylinklabs.watchtower.enable=true"
-#    volumes:
-#      - /did/bitmonero:/home/monero
-#    ports:
-#      - 18080:18080
-#      - 18084:18084
-#      - 18089:18089
-#    command: >-
-#      --rpc-restricted-bind-ip=0.0.0.0 --rpc-restricted-bind-port=18089
-#      --public-node --no-igd --enable-dns-blocklist --prune-blockchain
-#      --zmq-pub=tcp://0.0.0.0:18084 --in-peers=50 --out-peers=50
   watchtower:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     command: --interval 30
     restart: always
+  peppermint_postgres:
+    container_name: peppermint_postgres
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - /did/peppermint_pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: peppermint
+      POSTGRES_PASSWORD: 51531351a53s1d531a53s1d53a1s5d31a35sd1
+      POSTGRES_DB: peppermint
+
+  peppermint:
+    container_name: peppermint
+    image: pepperlabs/peppermint:latest
+    ports:
+      - 3000:3000
+      - 5003:5003
+    restart: always
+    depends_on:
+      - peppermint_postgres
+    healthcheck:
+      test: ["CMD", "sh", "-c", "wget --spider $$API_URL"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    environment:
+      DB_USERNAME: "peppermint"
+      DB_PASSWORD: "51531351a53s1d531a53s1d53a1s5d31a35sd1"
+      DB_HOST: "peppermint_postgres"
+      SECRET: 'peppermint4life'
