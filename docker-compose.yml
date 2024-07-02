@@ -30,25 +30,6 @@ services:
           - "/did/mirror/mirror/mirror:/mirror:ro"
       ports:
           - "8080:80"
-  p2pool:
-    image: ghcr.io/sethforprivacy/p2pool:latest
-    restart: unless-stopped
-    container_name: p2pool
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-    tty: true
-    stdin_open: true
-    volumes:
-      - /did/p2pool:/home/p2pool
-      - /dev/hugepages:/dev/hugepages:rw
-    ports:
-      - 3333:3333
-      - 37889:37889
-    command: >-
-      --wallet "43Ye68LVLqsbss35nQH3LdP6j5R1kziDDcFHWeB93VDTUtQDsc2PBe3dowrVjZa8M1Z7Jx3ysBEbd2nnneN9A86224bpDKv"
-      --stratum "0.0.0.0:3333" --p2p "0.0.0.0:37889" --zmq-port "18084"
-      --loglevel "0" --addpeers "65.21.227.114:37889,node.sethforprivacy.com:37889"
-      --host "p2pmd.xmrvsbeast.com" --mini
   watchtower:
     image: containrrr/watchtower
     volumes:
