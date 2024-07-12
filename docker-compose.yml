@@ -109,5 +109,50 @@ services:
     volumes:
       - /did/dns-server-config:/etc/dns
     restart: unless-stopped
+  monerod:
+    image: sethsimmons/simple-monerod:latest
+    restart: always
+    container_name: monerod
+    user: 1000:1000
+    volumes:
+      - /did/bitmonero:/home/monero
+    ports:
+      - 18080:18080
+      - 18083:18083
+      - 18089:18089
+    healthcheck:
+      test: curl --fail http://localhost:18081/get_height || exit 1
+      interval: 60s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
+    command:
+      - "--rpc-restricted-bind-ip=0.0.0.0"
+      - "--rpc-restricted-bind-port=18089"
+      - "--rpc-bind-ip=0.0.0.0"
+      - "--rpc-bind-port=18081"
+      - "--public-node"
+      - "--no-igd"
+      - "--confirm-external-bind"
+      - "--enable-dns-blocklist"
+      - "--prune-blockchain"
+      - "--sync-pruned-blocks"
+      - "--limit-rate-down=1048576"
+      - "--max-log-files=3"
+      - "--max-log-file-size=1048576"
+      - "--zmq-pub=tcp://0.0.0.0:18083"
+      - "--out-peers=64"
+
+  explore:
+    image: xmrblocks:latest
+    build: ./onion-monero-blockchain-explorer
+    container_name: explore
+    restart: unless-stopped
+    volumes:
+      - /did/bitmonero/.bitmonero:/home/monero/.bitmonero
+    ports:
+      - 8081:8081
+    command: ["./xmrblocks --daemon-url=monerod:18089 --enable-json-api --enable-autorefresh-option --enable-emission-monitor --enable-pusher"]
+
    # sysctls:
    #   - net.ipv4.ip_local_port_range=1024 65000
