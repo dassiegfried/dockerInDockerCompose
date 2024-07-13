@@ -172,7 +172,7 @@ services:
       - /did/bitmonero/.bitmonero:/home/monero/.bitmonero
     ports:
       - 8081:8081
-    command: ["./xmrblocks --daemon-url=node.yeetin.me:18089 --enable-json-api --enable-autorefresh-option --enable-emission-monitor --enable-pusher"]
+    command: ["./xmrblocks --daemon-url=10.0.0.34:18089 --enable-json-api --enable-autorefresh-option --enable-emission-monitor --enable-pusher"]
 
    # sysctls:
    #   - net.ipv4.ip_local_port_range=1024 65000
