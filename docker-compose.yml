@@ -139,7 +139,7 @@ services:
     network_mode: "service:gluetun"
     user: 1000:1000
     tty: true
-      stdin_open: true
+    stdin_open: true
     volumes:
       - /did/bitmonero:/home/monero
     healthcheck:
