@@ -147,9 +147,9 @@ services:
       retries: 10
       start_period: 40s
     command:
-      - "--rpc-restricted-bind-ip=0.0.0.0"
+      - "--rpc-restricted-bind-ip=83.143.245.51"
       - "--rpc-restricted-bind-port=28962"
-      - "--rpc-bind-ip=0.0.0.0"
+      - "--rpc-bind-ip=83.143.245.51"
       - "--rpc-bind-port=28961"
       - "--public-node"
       - "--igd=enabled"
@@ -160,7 +160,7 @@ services:
       - "--limit-rate-down=1048576"
       - "--max-log-files=3"
       - "--max-log-file-size=1048576"
-      - "--zmq-pub=tcp://0.0.0.0:28949"
+      - "--zmq-pub=tcp://83.143.245.51:28949"
       - "--out-peers=64"
 
   explore:
