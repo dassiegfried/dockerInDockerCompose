@@ -152,7 +152,7 @@ services:
       - "--rpc-bind-ip=0.0.0.0"
       - "--rpc-bind-port=28961"
       - "--public-node"
-      - "--igd"
+      - "--igd=enabled"
       - "--confirm-external-bind"
       - "--enable-dns-blocklist"
       - "--prune-blockchain"
