@@ -122,6 +122,7 @@ services:
       - 8888:8888/tcp # HTTP proxy
       - 8388:8388/tcp # Shadowsocks
       - 8388:8388/udp # Shadowsocks     
+      - 18089:28962
     volumes:
       - /did/guletun:/gluetun
     restart: always
@@ -171,7 +172,7 @@ services:
       - /did/bitmonero/.bitmonero:/home/monero/.bitmonero
     ports:
       - 8081:8081
-    command: ["./xmrblocks --daemon-url=monerod:28962 --enable-json-api --enable-autorefresh-option --enable-emission-monitor --enable-pusher"]
+    command: ["./xmrblocks --daemon-url=node.yeetin.me:18089 --enable-json-api --enable-autorefresh-option --enable-emission-monitor --enable-pusher"]
 
    # sysctls:
    #   - net.ipv4.ip_local_port_range=1024 65000
