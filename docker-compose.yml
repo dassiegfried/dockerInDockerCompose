@@ -133,7 +133,8 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
 
   monerod:
-    image: sethsimmons/simple-monerod:latest
+    image: simple-monerod:latest
+    build: ./onion-monero-blockchain-explorer
     restart: always
     container_name: monerod
     network_mode: "service:gluetun"
