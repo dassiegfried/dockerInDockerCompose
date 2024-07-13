@@ -147,7 +147,6 @@ services:
       retries: 10
       start_period: 40s
     command:
-      - "--p2p-bind-ip monerod.airdns.org"
       - "--rpc-restricted-bind-ip=0.0.0.0"
       - "--rpc-restricted-bind-port=28962"
       - "--rpc-bind-ip=0.0.0.0"
