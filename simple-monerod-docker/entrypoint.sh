@@ -3,6 +3,9 @@
 # Source is https://github.com/cornfeedhobo/docker-monero/blob/master/entrypoint.sh
 set -e
 
+# Set require --non-interactive flag
+set -- "monerod" "$@"
+
 # Configure NUMA if present for improved performance
 if command -v numactl >/dev/null 2>&1; then
     numa="numactl --interleave=all"
