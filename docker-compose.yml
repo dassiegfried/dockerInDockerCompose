@@ -134,7 +134,7 @@ services:
 
   monerod:
     image: simple-monerod:latest
-    build: ./onion-monero-blockchain-explorer
+    build: ./simple-monerod-docker
     restart: always
     container_name: monerod
     network_mode: "service:gluetun"
