@@ -109,17 +109,36 @@ services:
     volumes:
       - /did/dns-server-config:/etc/dns
     restart: unless-stopped
+ gluetun:
+   image: qmcgaw/gluetun
+   # container_name: gluetun
+   # line above must be uncommented to allow external containers to connect.
+   # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/connect-a-container-to-gluetun.md#external-container-to-gluetun
+   cap_add:
+     - NET_ADMIN
+   devices:#
+     - /dev/net/tun:/dev/net/tun
+   ports:
+     - 8888:8888/tcp # HTTP proxy
+     - 8388:8388/tcp # Shadowsocks
+     - 8388:8388/udp # Shadowsocks     
+   volumes:
+     - /did/guletun:/gluetun
+   restart: always
+   env_file:
+  - path: /did/gluetun.env
+    required: true
+   labels:
+     - "com.centurylinklabs.watchtower.enable=true"
+
   monerod:
     image: sethsimmons/simple-monerod:latest
     restart: always
     container_name: monerod
+    network_mode: "service:gluetun"
     user: 1000:1000
     volumes:
       - /did/bitmonero:/home/monero
-    ports:
-      - 18080:18080
-      - 18083:18083
-      - 18089:18089
     healthcheck:
       test: curl --fail http://localhost:18081/get_height || exit 1
       interval: 60s
@@ -128,9 +147,9 @@ services:
       start_period: 40s
     command:
       - "--rpc-restricted-bind-ip=0.0.0.0"
-      - "--rpc-restricted-bind-port=18089"
+      - "--rpc-restricted-bind-port=28962"
       - "--rpc-bind-ip=0.0.0.0"
-      - "--rpc-bind-port=18081"
+      - "--rpc-bind-port=28961"
       - "--public-node"
       - "--no-igd"
       - "--confirm-external-bind"
@@ -140,7 +159,7 @@ services:
       - "--limit-rate-down=1048576"
       - "--max-log-files=3"
       - "--max-log-file-size=1048576"
-      - "--zmq-pub=tcp://0.0.0.0:18083"
+      - "--zmq-pub=tcp://0.0.0.0:28949"
       - "--out-peers=64"
 
   explore:
@@ -152,7 +171,7 @@ services:
       - /did/bitmonero/.bitmonero:/home/monero/.bitmonero
     ports:
       - 8081:8081
-    command: ["./xmrblocks --daemon-url=monerod:18089 --enable-json-api --enable-autorefresh-option --enable-emission-monitor --enable-pusher"]
+    command: ["./xmrblocks --daemon-url=monerod:28962 --enable-json-api --enable-autorefresh-option --enable-emission-monitor --enable-pusher"]
 
    # sysctls:
    #   - net.ipv4.ip_local_port_range=1024 65000
