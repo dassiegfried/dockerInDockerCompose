@@ -1,3 +1,6 @@
 [submodule "onion-monero-blockchain-explorer"]
 	path = onion-monero-blockchain-explorer
 	url = https://github.com/moneroexamples/onion-monero-blockchain-explorer
+[submodule "basicswap"]
+	path = basicswap
+	url = https://github.com/basicswap/basicswap/
