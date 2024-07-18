@@ -178,25 +178,5 @@ services:
     command: ["./xmrblocks --daemon-url=10.0.0.34:18089 --enable-json-api --enable-autorefresh-option --enable-emission-monitor --enable-pusher"]
 
 
-  swapclient:
-    image: i_swapclient
-    stop_grace_period: 5m
-    build: ./basicswap
-    volumes:
-        - /did/COINDATA_PATH:/coindata
-    ports:
-        - 11700:11700
-        - 12700:12700
-    environment:
-        - TZ
-        - XMR_RPC_HOST=10.0.0.34
-        - BASE_XMR_RPC_PORT=18081
-    logging:
-        driver: "json-file"
-        options:
-            max-size: "10m"
-            max-file: "5"
-
-
    # sysctls:
    #   - net.ipv4.ip_local_port_range=1024 65000
