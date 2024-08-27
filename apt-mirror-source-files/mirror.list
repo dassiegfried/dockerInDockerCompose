@@ -42,12 +42,12 @@ deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports jammy-updates universe
 deb [arch=armhf] http://ports.ubuntu.com/ubuntu-ports jammy-backports main restricted universe multiverse
 clean http://ports.ubuntu.com/ubuntu-ports
 
-deb http://mirror.i3d.net/debian trixie main contrib non-free non-free-firmware
-deb http://mirror.i3d.net/debian trixie-updates main contrib non-free non-free-firmware
-deb [arch=arm64] http://mirror.i3d.net/debian trixie main contrib non-free non-free-firmware
-deb [arch=arm64] http://mirror.i3d.net/debian trixie-updates main contrib non-free non-free-firmware
-deb [arch=armhf] http://mirror.i3d.net/debian trixie main contrib non-free non-free-firmware
-deb [arch=armhf] http://mirror.i3d.net/debian trixie-updates main contrib non-free non-free-firmware
+deb http://mirror.i3d.net/debian trixie main contrib non-free non-free-firmware Sources
+deb http://mirror.i3d.net/debian trixie-updates main contrib non-free non-free-firmware Sources
+deb [arch=arm64] http://mirror.i3d.net/debian trixie main contrib non-free non-free-firmware Sources
+deb [arch=arm64] http://mirror.i3d.net/debian trixie-updates main contrib non-free non-free-firmware Sources
+deb [arch=armhf] http://mirror.i3d.net/debian trixie main contrib non-free non-free-firmware Sources
+deb [arch=armhf] http://mirror.i3d.net/debian trixie-updates main contrib non-free non-free-firmware Sources
 
 deb http://mirror.i3d.net/debian bookworm main contrib non-free non-free-firmware
 deb http://mirror.i3d.net/debian bookworm-updates main contrib non-free non-free-firmware
