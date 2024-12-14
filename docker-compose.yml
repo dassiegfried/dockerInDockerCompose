@@ -165,6 +165,7 @@ services:
       - "--max-log-file-size=1048576"
       - "--zmq-pub=tcp://0.0.0.0:28949"
       - "--out-peers=64"
+      - "--ban-list=/home/monero/monero-ban-list/ban_list.txt"
 
 
    # sysctls:
