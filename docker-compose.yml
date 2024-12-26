@@ -193,7 +193,7 @@ services:
       - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
       - WORDPRESS_DB_NAME=wordpress
     volumes:
-      - /did/wordpress:/var/www/html
+      - /did/wp:/var/www/html
     networks:
       - app-network
 
@@ -206,7 +206,7 @@ services:
     ports:
       - "10.0.0.34:80:80"
     volumes:
-      - /did/wordpress:/var/www/html
+      - /did/wp:/var/www/html
       - /did/nginx-conf:/etc/nginx/conf.d
       - /did/certbot-etc:/etc/letsencrypt
     networks:
@@ -219,7 +219,7 @@ services:
     container_name: certbot
     volumes:
       - /did/certbot-etc:/etc/letsencrypt
-      - /did/wordpress:/var/www/html
+      - /did/wp:/var/www/html
     command: certonly --webroot --webroot-path=/var/www/html --email yeet@bieringer.dev --agree-tos --no-eff-email --staging -d bieringer.dev -d www.bieringer.dev
 
 networks:
