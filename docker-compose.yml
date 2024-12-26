@@ -176,7 +176,7 @@ services:
       - MYSQL_DATABASE=wordpress
     volumes:
       - /did/dbdata:/var/lib/mysql
-    command: '--default-authentication-plugin=mysql_native_password'
+    command: '--mysql-native-password=ON'
     networks:
       - app-network
 
