@@ -202,6 +202,16 @@ services:
     restart: always
     privileged: true
     network_mode: host
+    
+  archiveTeamWarrior:
+    image: atdr.meo.ws/archiveteam/warrior-dockerfile
+    container_name: archiveTeamWarrior
+    hostname: archiveTeamWarrior
+    ports:
+      - "8001:8001"
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: always
 
 networks:
   app-network:
