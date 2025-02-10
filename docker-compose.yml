@@ -253,6 +253,56 @@ services:
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
 
+  archiveTeamWarrior6:
+    image: atdr.meo.ws/archiveteam/warrior-dockerfile
+    container_name: archiveTeamWarrior6
+    hostname: archiveTeamWarrior
+    ports:
+      - "8006:8001"
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: always
+
+  archiveTeamWarrior01:
+    image: atdr.meo.ws/archiveteam/warrior-dockerfile
+    container_name: archiveTeamWarrior01
+    hostname: archiveTeamWarrior
+    ports:
+      - "8010:8001"
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: always
+
+  archiveTeamWarrior7:
+    image: atdr.meo.ws/archiveteam/warrior-dockerfile
+    container_name: archiveTeamWarrior7
+    hostname: archiveTeamWarrior
+    ports:
+      - "8007:8001"
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: always
+
+  archiveTeamWarrior8:
+    image: atdr.meo.ws/archiveteam/warrior-dockerfile
+    container_name: archiveTeamWarrior8
+    hostname: archiveTeamWarrior
+    ports:
+      - "8008:8001"
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: always
+
+  archiveTeamWarrior9:
+    image: atdr.meo.ws/archiveteam/warrior-dockerfile
+    container_name: archiveTeamWarrior9
+    hostname: archiveTeamWarrior
+    ports:
+      - "8009:8001"
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: always
+
 networks:
   app-network:
     driver: bridge
