@@ -305,12 +305,13 @@ services:
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
+    privileged: true
     devices:
       - "/dev/dri/card0:/dev/dri/card0"
       - "/dev/dri/renderD128:/dev/dri/renderD128"
     environment:
-      - PUID=0
-      - PGID=0
+      - PUID=568
+      - PGID=568
       - TZ=Europe/Berlin
       - JELLYFIN_PublishedServerUrl=http://10.0.0.34 #optional
     volumes:
