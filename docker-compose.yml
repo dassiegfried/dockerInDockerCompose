@@ -309,8 +309,8 @@ services:
       - "/dev/dri/card0:/dev/dri/card0"
       - "/dev/dri/renderD128:/dev/dri/renderD128"
     environment:
-      - PUID=568
-      - PGID=568
+      - PUID=0
+      - PGID=0
       - TZ=Europe/Berlin
       - JELLYFIN_PublishedServerUrl=http://10.0.0.34 #optional
     volumes:
