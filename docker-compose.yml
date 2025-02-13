@@ -324,6 +324,12 @@ services:
     # Optional - may be necessary for docker healthcheck to pass if running in host network mode
     extra_hosts:
       - 'host.docker.internal:host-gateway'
+
+  portcheck:
+    env_file: /did/qbtPortCheck/.env
+    image: "eiqnepm/portcheck:latest"
+    network_mode: "service:gluetun"
+    restart: "unless-stopped"
 networks:
   app-network:
     driver: bridge
