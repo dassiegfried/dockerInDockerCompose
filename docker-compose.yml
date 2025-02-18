@@ -345,3 +345,6 @@ services:
       - LOG_LEVEL=info
    # sysctls:
    #   - net.ipv4.ip_local_port_range=1024 65000
+networks:
+  app-network:
+    driver: bridge
