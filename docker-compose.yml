@@ -357,7 +357,7 @@ services:
       ND_SCANSCHEDULE: 1h
       ND_LOGLEVEL: info  
       ND_SESSIONTIMEOUT: 24h
-      ND_BASEURL: "music.yeetin.me"
+      ND_BASEURL: "https://music.yeetin.me"
     volumes:
       - "/did/navidrome:/data"
       - "/mnt/hdds/media/music:/music:ro"
