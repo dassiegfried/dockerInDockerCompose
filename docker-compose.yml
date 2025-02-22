@@ -350,12 +350,24 @@ services:
     image: deluan/navidrome:latest
     user: 568:568 # should be owner of volumes
     env_file: /did/navidrome/.env
+    container_name: navidrome
     ports:
       - "4533:4533"
     restart: unless-stopped
     volumes:
       - "/did/navidrome:/data"
       - "/mnt/hdds/media/music:/music:ro"
+
+  lidify:
+    image: thewicklowwolf/lidify:latest
+    container_name: lidify
+    env_file: /did/lidify/.env
+    volumes:
+      - /did/lidify:/lidify/config
+      - "/mnt/hdds/media/music:/data/media/music:ro"
+    ports:
+      - 5000:5000
+    restart: unless-stopped
 networks:
   app-network:
     driver: bridge
