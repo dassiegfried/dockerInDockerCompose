@@ -207,6 +207,10 @@ services:
     image: atdr.meo.ws/archiveteam/warrior-dockerfile
     container_name: archiveTeamWarrior
     hostname: archiveTeamWarrior
+    environment:
+      - DOWNLOADER="bierboi"
+      - CONCURRENT_ITEMS=6
+      - SELECTED_PROJECT="pastebin"
     ports:
       - "8001:8001"
     labels:
@@ -217,6 +221,10 @@ services:
     image: atdr.meo.ws/archiveteam/warrior-dockerfile
     container_name: archiveTeamWarrior2
     hostname: archiveTeamWarrior
+    environment:
+      - DOWNLOADER="bierboi"
+      - CONCURRENT_ITEMS=6
+      - SELECTED_PROJECT="mediafire"
     ports:
       - "8002:8001"
     labels:
@@ -227,6 +235,10 @@ services:
     image: atdr.meo.ws/archiveteam/warrior-dockerfile
     container_name: archiveTeamWarrior3
     hostname: archiveTeamWarrior
+    environment:
+      - DOWNLOADER="bierboi"
+      - CONCURRENT_ITEMS=6
+      - SELECTED_PROJECT="imgur"
     ports:
       - "8003:8001"
     labels:
@@ -237,6 +249,10 @@ services:
     image: atdr.meo.ws/archiveteam/warrior-dockerfile
     container_name: archiveTeamWarrior4
     hostname: archiveTeamWarrior
+    environment:
+      - DOWNLOADER="bierboi"
+      - CONCURRENT_ITEMS=6
+      - SELECTED_PROJECT="blogger"
     ports:
       - "8004:8001"
     labels:
@@ -247,6 +263,10 @@ services:
     image: atdr.meo.ws/archiveteam/warrior-dockerfile
     container_name: archiveTeamWarrior5
     hostname: archiveTeamWarrior
+    environment:
+      - DOWNLOADER="bierboi"
+      - CONCURRENT_ITEMS=6
+      - SELECTED_PROJECT="urls"
     ports:
       - "8005:8001"
     labels:
@@ -257,6 +277,10 @@ services:
     image: atdr.meo.ws/archiveteam/warrior-dockerfile
     container_name: archiveTeamWarrior6
     hostname: archiveTeamWarrior
+    environment:
+      - DOWNLOADER="bierboi"
+      - CONCURRENT_ITEMS=6
+      - SELECTED_PROJECT="terroroftinytown"
     ports:
       - "8006:8001"
     labels:
@@ -267,6 +291,10 @@ services:
     image: atdr.meo.ws/archiveteam/warrior-dockerfile
     container_name: archiveTeamWarrior01
     hostname: archiveTeamWarrior
+    environment:
+      - DOWNLOADER="bierboi"
+      - CONCURRENT_ITEMS=6
+      - SELECTED_PROJECT="livestream"
     ports:
       - "8010:8001"
     labels:
@@ -277,6 +305,10 @@ services:
     image: atdr.meo.ws/archiveteam/warrior-dockerfile
     container_name: archiveTeamWarrior7
     hostname: archiveTeamWarrior
+    environment:
+      - DOWNLOADER="bierboi"
+      - CONCURRENT_ITEMS=6
+      - SELECTED_PROJECT="telegram"
     ports:
       - "8007:8001"
     labels:
@@ -287,6 +319,10 @@ services:
     image: atdr.meo.ws/archiveteam/warrior-dockerfile
     container_name: archiveTeamWarrior8
     hostname: archiveTeamWarrior
+    environment:
+      - DOWNLOADER="bierboi"
+      - CONCURRENT_ITEMS=6
+      - SELECTED_PROJECT="usgovernment"
     ports:
       - "8008:8001"
     labels:
@@ -297,6 +333,10 @@ services:
     image: atdr.meo.ws/archiveteam/warrior-dockerfile
     container_name: archiveTeamWarrior9
     hostname: archiveTeamWarrior
+    environment:
+      - DOWNLOADER="bierboi"
+      - CONCURRENT_ITEMS=6
+      - SELECTED_PROJECT="goo-gl"
     ports:
       - "8009:8001"
     labels:
