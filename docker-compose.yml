@@ -19,7 +19,7 @@ services:
           dockerfile: apt-mirror.Dockerfile
       command: bash -c "apt-mirror && bash /apt-mirror/postmirror.sh"
       volumes:
-          - "/mnt/nvme/dockerInDocker/mirror/mirror:/var/spool/apt-mirror"  
+          - "/mnt/hdds/didHdd/mirror/mirror:/var/spool/apt-mirror"  
   server:
       build:
           context: .
