@@ -450,7 +450,6 @@ services:
       - CONNECTION_TIMEOUT="30000"
       - DEFAULT_BLOCK_ADS="true"
       - DEFAULT_HEADLESS="true"
-      - DEFAULT_IGNORE_DEFAULT_ARGS="false"
       - DEFAULT_IGNORE_HTTPS_ERRORS="false"
       - DISABLE_AUTO_SET_DOWNLOAD_BEHAVIOR="false"
       - ENABLE_API_GET="false"
