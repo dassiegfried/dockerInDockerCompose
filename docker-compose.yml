@@ -175,7 +175,7 @@ services:
     container_name: webserver
     restart: unless-stopped
     ports:
-      - "10.0.0.34:80:80"
+      - "10.0.0.7:8420:80"
     volumes:
       - /mnt/nvme/dockerInDocker/wp:/var/www/html
       - /mnt/nvme/dockerInDocker/nginx-conf:/etc/nginx/conf.d
@@ -380,7 +380,7 @@ services:
     restart: 'unless-stopped'
     # Optional - alternative address used for autodiscovery
     environment:
-      - JELLYFIN_PublishedServerUrl=http://10.0.0.34
+      - JELLYFIN_PublishedServerUrl=http://10.0.0.7
     # Optional - may be necessary for docker healthcheck to pass if running in host network mode
     extra_hosts:
       - 'host.docker.internal:host-gateway'
