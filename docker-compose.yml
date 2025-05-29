@@ -511,7 +511,7 @@ services:
   jackett:
     image: ghcr.io/linuxserver/jackett:0.22.1956
     container_name: jackett
-    network_mode: "service:gluetun"
+    network_mode: "service:gluetun-jackett"
     healthcheck:
       test: "curl --fail http://localhost:9117/UI/Login?ReturnUrl=%2FUI%2FDashboard || exit 1"
       interval: 60s
