@@ -8,7 +8,7 @@ services:
     ports:
       - "5800:5800"
     volumes:
-      - "/did/mediathek:/config:rw"
+      - "/mnt/nvme/dockerInDocker/mediathek:/config:rw"
       - "/mnt/hdds/media/mediathek:/output:rw"
     environment:
        - "USER_ID=568"
@@ -19,7 +19,7 @@ services:
           dockerfile: apt-mirror.Dockerfile
       command: bash -c "apt-mirror && bash /apt-mirror/postmirror.sh"
       volumes:
-          - "/did/mirror/mirror:/var/spool/apt-mirror"  
+          - "/mnt/nvme/dockerInDocker/mirror/mirror:/var/spool/apt-mirror"  
   server:
       build:
           context: .
@@ -27,7 +27,7 @@ services:
       restart: always
       command: [nginx-debug, '-g', 'daemon off;']
       volumes:
-          - "/did/mirror/mirror/mirror:/mirror:ro"
+          - "/mnt/nvme/dockerInDocker/mirror/mirror/mirror:/mirror:ro"
       ports:
           - "8080:80"
   watchtower:
@@ -76,7 +76,7 @@ services:
       - DNS_SERVER_FORWARDER_PROTOCOL=Tls #Forwarder protocol options: Udp, Tcp, Tls, Https, HttpsJson.
       # - DNS_SERVER_LOG_USING_LOCAL_TIME=true #Enable this option to use local time instead of UTC for logging.
     volumes:
-      - /did/dns-server-config:/etc/dns
+      - /mnt/nvme/dockerInDocker/dns-server-config:/etc/dns
     restart: unless-stopped
   gluetun:
     image: qmcgaw/gluetun
@@ -93,10 +93,10 @@ services:
       - 8388:8388/udp # Shadowsocks     
       - 18089:28962
     volumes:
-      - /did/guletun:/gluetun
+      - /mnt/nvme/dockerInDocker/guletun:/gluetun
     restart: always
     env_file:
-    - path: /did/gluetun.env
+    - path: /mnt/nvme/dockerInDocker/gluetun.env
       required: true
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -111,7 +111,7 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      - /did/bitmonero:/home/monero
+      - /mnt/nvme/dockerInDocker/bitmonero:/home/monero
     healthcheck:
       test: curl --fail http://localhost:18081/get_height || exit 1
       interval: 60s
@@ -140,11 +140,11 @@ services:
     image: mysql:8.4
     container_name: db
     restart: unless-stopped
-    env_file: /did/wordpress/.env
+    env_file: /mnt/nvme/dockerInDocker/wordpress/.env
     environment:
       - MYSQL_DATABASE=wordpress
     volumes:
-      - /did/dbdata:/var/lib/mysql
+      - /mnt/nvme/dockerInDocker/dbdata:/var/lib/mysql
     command: '--mysql-native-password=ON'
     networks:
       - app-network
@@ -157,14 +157,14 @@ services:
           dockerfile: wordpress.Dockerfile
     container_name: wordpress
     restart: unless-stopped
-    env_file: /did/wordpress/.env
+    env_file: /mnt/nvme/dockerInDocker/wordpress/.env
     environment:
       - WORDPRESS_DB_HOST=db:3306
       - WORDPRESS_DB_USER=$MYSQL_USER
       - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
       - WORDPRESS_DB_NAME=wordpress
     volumes:
-      - /did/wp:/var/www/html
+      - /mnt/nvme/dockerInDocker/wp:/var/www/html
     networks:
       - app-network
 
@@ -177,9 +177,9 @@ services:
     ports:
       - "10.0.0.34:80:80"
     volumes:
-      - /did/wp:/var/www/html
-      - /did/nginx-conf:/etc/nginx/conf.d
-      - /did/certbot-etc:/etc/letsencrypt
+      - /mnt/nvme/dockerInDocker/wp:/var/www/html
+      - /mnt/nvme/dockerInDocker/nginx-conf:/etc/nginx/conf.d
+      - /mnt/nvme/dockerInDocker/certbot-etc:/etc/letsencrypt
     networks:
       - app-network
 
@@ -189,16 +189,16 @@ services:
     image: certbot/certbot
     container_name: certbot
     volumes:
-      - /did/certbot-etc:/etc/letsencrypt
-      - /did/wp:/var/www/html
+      - /mnt/nvme/dockerInDocker/certbot-etc:/etc/letsencrypt
+      - /mnt/nvme/dockerInDocker/wp:/var/www/html
     command: certonly --webroot --webroot-path=/var/www/html --email yeet@bieringer.dev --agree-tos --no-eff-email --staging -d bieringer.dev -d www.bieringer.dev
 
   esphome:
     container_name: esphome
     image: ghcr.io/esphome/esphome
-    env_file: /did/espHome/.env
+    env_file: /mnt/nvme/dockerInDocker/espHome/.env
     volumes:
-      - /did/espHome/config:/config
+      - /mnt/nvme/dockerInDocker/espHome/config:/config
     restart: always
     privileged: true
     network_mode: host
@@ -208,7 +208,7 @@ services:
     container_name: archiveTeamWarrior
     hostname: archiveTeamWarrior
     volumes:
-      - /did/archiveTeamWarriorConfigs/noNbr:/home/warrior/projects
+      - /mnt/nvme/dockerInDocker/archiveTeamWarriorConfigs/noNbr:/home/warrior/projects
     environment:
       - DOWNLOADER="bierboi"
       - CONCURRENT_ITEMS=6
@@ -224,7 +224,7 @@ services:
     container_name: archiveTeamWarrior2
     hostname: archiveTeamWarrior
     volumes:
-      - /did/archiveTeamWarriorConfigs/2:/home/warrior/projects
+      - /mnt/nvme/dockerInDocker/archiveTeamWarriorConfigs/2:/home/warrior/projects
     environment:
       - DOWNLOADER="bierboi"
       - CONCURRENT_ITEMS=6
@@ -240,7 +240,7 @@ services:
     container_name: archiveTeamWarrior3
     hostname: archiveTeamWarrior
     volumes:
-      - /did/archiveTeamWarriorConfigs/3:/home/warrior/projects
+      - /mnt/nvme/dockerInDocker/archiveTeamWarriorConfigs/3:/home/warrior/projects
     environment:
       - DOWNLOADER="bierboi"
       - CONCURRENT_ITEMS=6
@@ -256,7 +256,7 @@ services:
     container_name: archiveTeamWarrior4
     hostname: archiveTeamWarrior
     volumes:
-      - /did/archiveTeamWarriorConfigs/4:/home/warrior/projects
+      - /mnt/nvme/dockerInDocker/archiveTeamWarriorConfigs/4:/home/warrior/projects
     environment:
       - DOWNLOADER="bierboi"
       - CONCURRENT_ITEMS=6
@@ -271,7 +271,7 @@ services:
     image: atdr.meo.ws/archiveteam/warrior-dockerfile
     container_name: archiveTeamWarrior5
     volumes:
-      - /did/archiveTeamWarriorConfigs/5:/home/warrior/projects
+      - /mnt/nvme/dockerInDocker/archiveTeamWarriorConfigs/5:/home/warrior/projects
     hostname: archiveTeamWarrior
     environment:
       - DOWNLOADER="bierboi"
@@ -288,7 +288,7 @@ services:
     container_name: archiveTeamWarrior6
     hostname: archiveTeamWarrior
     volumes:
-      - /did/archiveTeamWarriorConfigs/6:/home/warrior/projects
+      - /mnt/nvme/dockerInDocker/archiveTeamWarriorConfigs/6:/home/warrior/projects
     environment:
       - DOWNLOADER="bierboi"
       - CONCURRENT_ITEMS=6
@@ -304,7 +304,7 @@ services:
     container_name: archiveTeamWarrior01
     hostname: archiveTeamWarrior
     volumes:
-      - /did/archiveTeamWarriorConfigs/01:/home/warrior/projects
+      - /mnt/nvme/dockerInDocker/archiveTeamWarriorConfigs/01:/home/warrior/projects
     environment:
       - DOWNLOADER="bierboi"
       - CONCURRENT_ITEMS=6
@@ -320,7 +320,7 @@ services:
     container_name: archiveTeamWarrior7
     hostname: archiveTeamWarrior
     volumes:
-      - /did/archiveTeamWarriorConfigs/7:/home/warrior/projects
+      - /mnt/nvme/dockerInDocker/archiveTeamWarriorConfigs/7:/home/warrior/projects
     environment:
       - DOWNLOADER="bierboi"
       - CONCURRENT_ITEMS=6
@@ -336,7 +336,7 @@ services:
     container_name: archiveTeamWarrior8
     hostname: archiveTeamWarrior
     volumes:
-      - /did/archiveTeamWarriorConfigs/8:/home/warrior/projects
+      - /mnt/nvme/dockerInDocker/archiveTeamWarriorConfigs/8:/home/warrior/projects
     environment:
       - DOWNLOADER="bierboi"
       - CONCURRENT_ITEMS=6
@@ -352,7 +352,7 @@ services:
     container_name: archiveTeamWarrior9
     hostname: archiveTeamWarrior
     volumes:
-      - /did/archiveTeamWarriorConfigs/9:/home/warrior/projects
+      - /mnt/nvme/dockerInDocker/archiveTeamWarriorConfigs/9:/home/warrior/projects
     environment:
       - DOWNLOADER="bierboi"
       - CONCURRENT_ITEMS=6
@@ -372,8 +372,8 @@ services:
       - "/dev/dri/card0:/dev/dri/card0"
       - "/dev/dri/renderD128:/dev/dri/renderD128"
     volumes:
-      - /did/jellyConfig:/config
-      - /did/jellyCache:/cache
+      - /mnt/nvme/dockerInDocker/jellyConfig:/config
+      - /mnt/nvme/dockerInDocker/jellyCache:/cache
       - type: bind
         source: /mnt/hdds/media
         target: /mnt/hdds/media
@@ -392,7 +392,7 @@ services:
     # Network mode must be set to host for MA to work correctly
     network_mode: host
     volumes:
-      - /did/music-assistant-server/data:/data/
+      - /mnt/nvme/dockerInDocker/music-assistant-server/data:/data/
     # privileged caps (and security-opt) needed to mount smb folders within the container
     cap_add:
       - SYS_ADMIN
@@ -409,21 +409,21 @@ services:
   navidrome:
     image: deluan/navidrome:latest
     user: 568:568 # should be owner of volumes
-    env_file: /did/navidrome/.env
+    env_file: /mnt/nvme/dockerInDocker/navidrome/.env
     container_name: navidrome
     ports:
       - "4533:4533"
     restart: unless-stopped
     volumes:
-      - "/did/navidrome:/data"
+      - "/mnt/nvme/dockerInDocker/navidrome:/data"
       - "/mnt/hdds/media/music:/music:ro"
 
   lidify:
     image: thewicklowwolf/lidify:latest
     container_name: lidify
-    env_file: /did/lidify/.env
+    env_file: /mnt/nvme/dockerInDocker/lidify/.env
     volumes:
-      - /did/lidify:/lidify/config
+      - /mnt/nvme/dockerInDocker/lidify:/lidify/config
       - "/mnt/hdds/media/music:/data/media/music:ro"
     ports:
       - 5000:5000
