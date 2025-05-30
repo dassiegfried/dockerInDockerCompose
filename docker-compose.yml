@@ -556,7 +556,7 @@ services:
       resources:
         limits:
           cpus: '10'
-          memory: 10G
+          memory: 20G
 networks:
   app-network:
     driver: bridge
