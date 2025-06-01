@@ -374,8 +374,8 @@ services:
       - /mnt/nvme/dockerInDocker/jelly-p-Config:/config
       - /mnt/nvme/dockerInDocker/jelly-p-Cache:/cache
       - type: bind
-        source: /mnt/hdds/media
-        target: /mnt/hdds/media
+        source: /mnt/hdds/storj/Hetzner/mediaBox/porn
+        target: /mnt/hdds/storj/Hetzner/mediaBox/porn
     restart: 'unless-stopped'
     group_add:
       - 44
