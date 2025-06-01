@@ -160,8 +160,6 @@ services:
     env_file: /mnt/nvme/dockerInDocker/wordpress/.env
     environment:
       - WORDPRESS_DB_HOST=db:3306
-      - WORDPRESS_DB_USER=$MYSQL_USER
-      - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
       - WORDPRESS_DB_NAME=wordpress
     volumes:
       - /mnt/nvme/dockerInDocker/wp:/var/www/html
