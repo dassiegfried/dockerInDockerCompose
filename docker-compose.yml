@@ -27,7 +27,7 @@ services:
       restart: always
       command: [nginx-debug, '-g', 'daemon off;']
       volumes:
-          - "/mnt/nvme/dockerInDocker/mirror/mirror/mirror:/mirror:ro"
+          - "/mnt/hdds/didHdd/mirror/mirror:/mirror:ro"
       ports:
           - "8080:80"
   watchtower:
