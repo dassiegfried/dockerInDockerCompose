@@ -169,7 +169,7 @@ services:
   webserver:
     depends_on:
       - wordpress
-    image: nginx:1.27.3-alpine
+    image: nginx:1.28-alpine
     container_name: webserver
     restart: unless-stopped
     ports:
@@ -530,7 +530,7 @@ services:
     restart: always
     env_file: /mnt/nvme/dockerInDocker/gluetun-jackett.env
   jackett:
-    image: ghcr.io/linuxserver/jackett:0.22.1956
+    image: ghcr.io/linuxserver/jackett:0.22.1987
     container_name: jackett
     network_mode: "service:gluetun-jackett"
     healthcheck:
