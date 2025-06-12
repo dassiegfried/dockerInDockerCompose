@@ -530,7 +530,7 @@ services:
     restart: always
     env_file: /mnt/nvme/dockerInDocker/gluetun-jackett.env
   jackett:
-    image: ghcr.io/linuxserver/jackett:0.22.1987
+    image: ghcr.io/linuxserver/jackett:0.22.2004
     container_name: jackett
     network_mode: "service:gluetun-jackett"
     healthcheck:
