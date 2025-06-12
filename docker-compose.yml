@@ -568,6 +568,7 @@ services:
       - S6_READ_ONLY_ROOT="1"
       - QBITTORRENT__PORT="10095"
       - QBT_Preferences__WebUI__Address="*"
+      - QBT_TORRENTING_PORT="21057"
     volumes:
       - /mnt/hdds/media:/jellyMedia
       - /mnt/nvme/qbtTmp:/qbtTmp
