@@ -512,7 +512,7 @@ services:
       - /mnt/nvme/tns-docker-apps/gluetun-jackett:/gluetun
     env_file: /mnt/nvme/dockerInDocker/gluetun-jackett.env
   jackett:
-    image: ghcr.io/linuxserver/jackett:0.22.2004
+    image: ghcr.io/linuxserver/jackett:0.22.2015
     container_name: jackett
     network_mode: "service:gluetun-jackett"
     healthcheck:
