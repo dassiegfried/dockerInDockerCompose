@@ -597,7 +597,7 @@ services:
     restart: always
     user: 1000:1000
     ports:
-      - 9001:9001
+      - 9002:9002
     volumes:
       - /etc/localtime:/etc/localtime
     deploy:
