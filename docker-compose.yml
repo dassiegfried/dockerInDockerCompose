@@ -542,7 +542,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Etc/Berlin
+      - TZ=Europe/Berlin
       - APP_KEY="base64:2vOHpKcdZuRqHVt9hXXbX1Nqi53O18DZG5/OQEoeyvc="
       - APP_URL="http://10.0.0.7:35412"
       - DB_CONNECTION=sqlite
@@ -553,7 +553,7 @@ services:
       - DB_DATABASE= #optional
       - DB_USERNAME= #optional
       - DB_PASSWORD= #optional
-      - DISPLAY_TIMEZONE=Etc/Berlin #optional
+      - DISPLAY_TIMEZONE=Europe/Berlin #optional
       - PRUNE_RESULTS_OLDER_THAN=90 #optional
     volumes:
       - /mnt/nvme/tns-docker-apps/speed-jackett/config:/config
@@ -564,7 +564,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Etc/Berlin
+      - TZ=Europe/Berlin
       - APP_KEY="base64:2vOHpKcdZuRqHVt9hXXbX1Nqi53O18DZG5/OQEoeyvc="
       - APP_URL="http://10.0.0.7:35411"
       - DB_CONNECTION=sqlite
@@ -575,7 +575,7 @@ services:
       - DB_DATABASE= #optional
       - DB_USERNAME= #optional
       - DB_PASSWORD= #optional
-      - DISPLAY_TIMEZONE=Etc/Berlin #optional
+      - DISPLAY_TIMEZONE=Europe/Berlin #optional
       - PRUNE_RESULTS_OLDER_THAN=90 #optional
     volumes:
       - /mnt/nvme/tns-docker-apps/speed/config:/config
