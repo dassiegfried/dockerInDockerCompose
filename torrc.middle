@@ -3,6 +3,7 @@ ORPort 9002
 Nickname bierboi
 ContactInfo yeet A T yeetin D O T me
 ExitPolicy reject *:*
+ControlPort 9051
 CookieAuthentication 1
 AccountingStart Month 1 00:00
 AccountingMax 5000 GBytes
