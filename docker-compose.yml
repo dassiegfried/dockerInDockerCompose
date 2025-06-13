@@ -508,6 +508,8 @@ services:
       - "9117:9117"
       - "35412:80"
     restart: always
+    volumes:
+      - /mnt/nvme/tns-docker-apps/gluetun-jackett:/gluetun
     env_file: /mnt/nvme/dockerInDocker/gluetun-jackett.env
   jackett:
     image: ghcr.io/linuxserver/jackett:0.22.2004
