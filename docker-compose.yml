@@ -599,6 +599,7 @@ services:
       - 9002:9002
     volumes:
       - /etc/localtime:/etc/localtime
+      - /mnt/nvme/tns-docker-apps/tor:/var/lib/tor
     deploy:
       resources:
         limits:
