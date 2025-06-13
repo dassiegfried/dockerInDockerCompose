@@ -578,7 +578,7 @@ services:
       - DISPLAY_TIMEZONE=Etc/Berlin #optional
       - PRUNE_RESULTS_OLDER_THAN=90 #optional
     volumes:
-      - /mnt/nvme/tns-docker-apps/speed-jackett/config:/config
+      - /mnt/nvme/tns-docker-apps/speed/config:/config
     ports:
       - 35411:80
     restart: unless-stopped
