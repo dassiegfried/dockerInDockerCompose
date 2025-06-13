@@ -87,6 +87,10 @@ services:
     user: 1000:1000
     tty: true
     stdin_open: true
+    ports:
+      - 18089:18089
+      - 18081:18081
+      - 18083:18083
     volumes:
       - /mnt/nvme/dockerInDocker/bitmonero:/home/monero
     healthcheck:
