@@ -18,4 +18,4 @@ RUN chown -R tor /etc/tor
 
 USER tor
 
-ENTRYPOINT [ "tor" "-f" "/etc/tor/torrc.middle" ]
+ENTRYPOINT [ "tor", "-f", "/etc/tor/torrc.middle" ]
