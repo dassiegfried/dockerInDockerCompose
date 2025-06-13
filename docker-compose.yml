@@ -506,7 +506,7 @@ services:
     ports:
       - 10095:10095
       - "9117:9117"
-      - "35411:80"
+      - "35412:80"
     restart: always
     env_file: /mnt/nvme/dockerInDocker/gluetun-jackett.env
   jackett:
