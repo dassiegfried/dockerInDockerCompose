@@ -593,7 +593,7 @@ services:
     build: 
           context: .
           dockerfile: tor.Dockerfile
-    container_name: tor
+    container_name: tor-middle
     restart: always
     user: 1000:1000
     ports:
