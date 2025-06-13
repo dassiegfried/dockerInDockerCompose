@@ -14,8 +14,8 @@ EXPOSE 9002
 COPY torrc.middle /etc/tor/torrc.middle
 
 # make sure files are owned by tor user
-RUN chown -R 1000:1000 /etc/tor
+RUN chown -R tor /etc/tor
 
-USER 1000:1000
+USER tor
 
 ENTRYPOINT [ "tor", "-f", "/etc/tor/torrc.middle" ]
