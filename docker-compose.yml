@@ -548,7 +548,7 @@ services:
       - APP_KEY="base64:2vOHpKcdZuRqHVt9hXXbX1Nqi53O18DZG5/OQEoeyvc="
       - APP_URL="http://10.0.0.7:35412"
       - DB_CONNECTION=sqlite
-      - SPEEDTEST_SCHEDULE=
+      - SPEEDTEST_SCHEDULE="6 * * * *"
       - SPEEDTEST_SERVERS=
       - DB_HOST= #optional
       - DB_PORT= #optional
@@ -570,7 +570,7 @@ services:
       - APP_KEY="base64:2vOHpKcdZuRqHVt9hXXbX1Nqi53O18DZG5/OQEoeyvc="
       - APP_URL="http://10.0.0.7:35411"
       - DB_CONNECTION=sqlite
-      - SPEEDTEST_SCHEDULE=
+      - SPEEDTEST_SCHEDULE="6 * * * *"
       - SPEEDTEST_SERVERS=
       - DB_HOST= #optional
       - DB_PORT= #optional
