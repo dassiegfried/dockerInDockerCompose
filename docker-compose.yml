@@ -588,6 +588,23 @@ services:
         limits:
           cpus: '10'
           memory: 20G
+
+  tor:
+    build: 
+          context: .
+          dockerfile: tor.Dockerfile
+    container_name: tor
+    restart: always
+    user: 1000:1000
+    ports:
+      - 9001:9001
+    volumes:
+      - /etc/localtime:/etc/localtime
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 5G
 networks:
   app-network:
     driver: bridge

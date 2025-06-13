@@ -1,0 +1,10 @@
+ORPort 9001
+## A handle for your relay, so people don't have to refer to it by key.
+Nickname bierboi
+ContactInfo yeet A T yeetin D O T me
+ExitPolicy reject *:*
+CookieAuthentication 1
+AccountingStart Month 1 00:00
+AccountingMax 5000 GBytes
+AccountingRule sum
+RelayBandwidthRate 20 MBytes
