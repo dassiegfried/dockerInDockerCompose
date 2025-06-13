@@ -90,6 +90,7 @@ services:
     ports:
       - 18089:18089
       - 18081:18081
+      - 18080:18080
       - 18083:18083
     volumes:
       - /mnt/nvme/dockerInDocker/bitmonero:/home/monero
