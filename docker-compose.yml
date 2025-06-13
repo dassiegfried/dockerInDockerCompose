@@ -533,6 +533,56 @@ services:
         limits:
           cpus: '2'
           memory: 1G
+
+  speedtest-tracker-gluetun:
+    image: lscr.io/linuxserver/speedtest-tracker:latest
+    container_name: speed-glue
+    network_mode: "service:gluetun-jackett"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/Berliin
+      - APP_KEY="base64:2vOHpKcdZuRqHVt9hXXbX1Nqi53O18DZG5/OQEoeyvc="
+      - APP_URL="http://10.0.0.7:35412"
+      - DB_CONNECTION=sqlite
+      - SPEEDTEST_SCHEDULE=
+      - SPEEDTEST_SERVERS=
+      - DB_HOST= #optional
+      - DB_PORT= #optional
+      - DB_DATABASE= #optional
+      - DB_USERNAME= #optional
+      - DB_PASSWORD= #optional
+      - DISPLAY_TIMEZONE=Etc/Berlin #optional
+      - PRUNE_RESULTS_OLDER_THAN=90 #optional
+    volumes:
+      - /mnt/nvme/tns-docker-apps/speed-jackett/config:/config
+    ports:
+      - 35412:80
+    restart: unless-stopped
+  speedtest-tracker:
+    image: lscr.io/linuxserver/speedtest-tracker:latest
+    container_name: speed
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/Berliin
+      - APP_KEY="base64:2vOHpKcdZuRqHVt9hXXbX1Nqi53O18DZG5/OQEoeyvc="
+      - APP_URL="http://10.0.0.7:35411"
+      - DB_CONNECTION=sqlite
+      - SPEEDTEST_SCHEDULE=
+      - SPEEDTEST_SERVERS=
+      - DB_HOST= #optional
+      - DB_PORT= #optional
+      - DB_DATABASE= #optional
+      - DB_USERNAME= #optional
+      - DB_PASSWORD= #optional
+      - DISPLAY_TIMEZONE=Etc/Berlin #optional
+      - PRUNE_RESULTS_OLDER_THAN=90 #optional
+    volumes:
+      - /mnt/nvme/tns-docker-apps/speed-jackett/config:/config
+    ports:
+      - 35411:80
+    restart: unless-stopped
   qbt:
     image: ghcr.io/onedr0p/qbittorrent:5.0.4
     container_name: qbt
