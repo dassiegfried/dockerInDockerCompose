@@ -78,35 +78,12 @@ services:
     volumes:
       - /mnt/nvme/dockerInDocker/dns-server-config:/etc/dns
     restart: unless-stopped
-  gluetun:
-    image: qmcgaw/gluetun
-    # container_name: gluetun
-    # line above must be uncommented to allow external containers to connect.
-    # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/connect-a-container-to-gluetun.md#external-container-to-gluetun
-    cap_add:
-      - NET_ADMIN
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    ports:
-      - 8888:8888/tcp # HTTP proxy
-      - 8388:8388/tcp # Shadowsocks
-      - 8388:8388/udp # Shadowsocks     
-      - 18089:28962
-    volumes:
-      - /mnt/nvme/dockerInDocker/guletun:/gluetun
-    restart: always
-    env_file:
-    - path: /mnt/nvme/dockerInDocker/gluetun.env
-      required: true
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
 
   monerod:
     image: simple-monerod:latest
     build: ./simple-monerod-docker
     restart: always
     container_name: monerod
-    network_mode: "service:gluetun"
     user: 1000:1000
     tty: true
     stdin_open: true
@@ -120,9 +97,8 @@ services:
       start_period: 40s
     command:
       - "--rpc-restricted-bind-ip=0.0.0.0"
-      - "--rpc-restricted-bind-port=28962"
+      - "--rpc-restricted-bind-port=18089"
       - "--rpc-bind-ip=0.0.0.0"
-      - "--rpc-bind-port=28961"
       - "--public-node"
       - "--igd=enabled"
       - "--confirm-external-bind"
@@ -132,7 +108,7 @@ services:
       - "--limit-rate-down=1048576"
       - "--max-log-files=3"
       - "--max-log-file-size=1048576"
-      - "--zmq-pub=tcp://0.0.0.0:28949"
+      - "--zmq-pub=tcp://0.0.0.0:18083"
       - "--out-peers=64"
       - "--ban-list=/home/monero/monero-ban-list/ban_list.txt"
 
