@@ -1,7 +1,9 @@
 version: '3.5'
 services:
   mediathekview:
-    image: conrad784/mediathekview-webinterface
+    build:
+        context: .
+        dockerfile: mediathek.Dockerfile
     container_name: mediathekview
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
