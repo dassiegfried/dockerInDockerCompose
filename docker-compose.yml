@@ -409,28 +409,7 @@ services:
       - 5000:5000
     restart: unless-stopped
 
-  homarr:
-    container_name: homarr
-    image: ghcr.io/ajnart/homarr:0.15.10
-    restart: unless-stopped
-    user: 568:568
-    deploy:
-      resources:
-        limits:
-          cpus: "1"
-          memory: 200M
-    volumes:
-      - /mnt/nvme/tns-docker-apps/homarr/homarr-config:/app/data/configs
-      - /mnt/nvme/tns-docker-apps/homarr/homarr-icons:/app/data/icons
-      - /mnt/nvme/tns-docker-apps/homarr/homarr-data:/data
-    environment:
-      - TZ="Europe/Berlin"
-      - UMASK="0022"
-      - UMASK_SET="0022"
-      - S6_READ_ONLY_ROOT="1"
-    ports:
-      - '10245:7575'
-
+ 
   browserless-chrome:
     image: browserless/chrome:1.61.1-chrome-stable
     container_name: browserless-chrome
