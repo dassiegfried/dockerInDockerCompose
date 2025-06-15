@@ -571,6 +571,27 @@ services:
           cpus: '10'
           memory: 20G
 
+  peppermint_postgres:
+    container_name: peppermint_postgres
+    image: postgres:17.5
+    restart: always
+    env_file: /mnt/nvme/tns-docker-apps/peppermint/db_env
+    ports:
+      - 5432:5432
+    volumes:
+      - /mnt/nvme/tns-docker-apps/peppermint/db:/var/lib/postgresql/data
+
+  peppermint:
+    container_name: peppermint
+    image: pepperlabs/peppermint:latest
+    env_file: /mnt/nvme/tns-docker-apps/peppermint/pepper_env
+    ports:
+      - 3000:3000
+      - 5003:5003
+    restart: always
+    depends_on:
+      - peppermint_postgres
+
   tor:
     build: 
           context: .
