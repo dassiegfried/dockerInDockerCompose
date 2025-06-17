@@ -474,7 +474,7 @@ services:
       - /mnt/nvme/tns-docker-apps/gluetun-jackett:/gluetun
     env_file: /mnt/nvme/dockerInDocker/gluetun-jackett-wg.env
   jackett:
-    image: ghcr.io/linuxserver/jackett:0.22.2020
+    image: ghcr.io/linuxserver/jackett:0.22.2015
     container_name: jackett
     network_mode: "service:gluetun-jackett"
     healthcheck:
@@ -570,7 +570,23 @@ services:
         limits:
           cpus: '10'
           memory: 20G
-
+  wireguard:
+    image: lscr.io/linuxserver/wireguard:latest
+    container_name: wireguard
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlinl
+      - LOG_CONFS=true #optional
+    volumes:
+      - /mnt/nvme/tns-docker-apps/wireguard/config:/config
+      - /lib/modules:/lib/modules #optional
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    restart: unless-stopped
 networks:
   app-network:
     driver: bridge
