@@ -587,6 +587,17 @@ services:
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
     restart: unless-stopped
+
+  jfa-go:
+    container_name: jfa
+    ports:
+        - 8056:8056
+    volumes:
+        - /mnt/nvme/tns-docker-apps/jfa-go:/data
+        - /mnt/nvme/dockerInDocker/jellyConfig:/jf
+        - /etc/localtime:/etc/localtime:ro
+    image: hrfee/jfa-go
+
 networks:
   app-network:
     driver: bridge
