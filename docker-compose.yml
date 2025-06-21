@@ -784,7 +784,7 @@ services:
     container_name: graylog
     image: graylog/graylog:6.2.2
     volumes:
-      - /mnt/nvme/tns-docker-apps/graylog_data:/usr/share/graylog/data
+      - graylog_data:/usr/share/graylog/data
     env_file: /mnt/nvme/dockerInDocker/graylog.env
     deploy:
       resources:
@@ -865,3 +865,5 @@ networks:
     driver: bridge
   graylog:
     driver: bridge
+volumes:
+  graylog_data:
