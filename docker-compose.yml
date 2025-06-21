@@ -783,7 +783,6 @@ services:
   graylog:
     container_name: graylog
     image: graylog/graylog:5.0.2
-    user: 1000:1000
     volumes:
       - /mnt/nvme/tns-docker-apps/graylog_data:/usr/share/graylog/data
     env_file: /mnt/nvme/dockerInDocker/graylog.env
