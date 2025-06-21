@@ -9,7 +9,7 @@ services:
       resources:
         limits:
           cpus: '2'
-          memory: 4G
+          memory: 8G
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     ports:
