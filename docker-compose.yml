@@ -782,6 +782,7 @@ services:
   graylog:
     container_name: graylog
     image: graylog/graylog:5.0.2
+    user: 1000:1000
     volumes:
       - /mnt/nvme/tns-docker-apps/graylog_data:/usr/share/graylog/data
     env_file: /mnt/nvme/dockerInDocker/graylog.env
@@ -835,6 +836,7 @@ services:
   grafana:
     container_name: grafana
     image: grafana/grafana:9.2.10
+    user: 1000:1000
     ports:
       - '3005:3000'
     deploy:
