@@ -836,7 +836,7 @@ services:
     container_name: grafana
     image: grafana/grafana:9.2.10
     ports:
-      - '3000:3000'
+      - '3005:3000'
     deploy:
       resources:
         limits:
