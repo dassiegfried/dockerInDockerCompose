@@ -771,13 +771,13 @@ services:
       - http.host=0.0.0.0
       - transport.host=localhost
       - network.host=0.0.0.0
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "ES_JAVA_OPTS=-Xms4096m -Xmx4096m"
     restart: "unless-stopped"
     deploy:
       resources:
         limits:
-          cpus: '3'
-          memory: 1024m
+          cpus: '6'
+          memory: 6G
     networks:
       - graylog
   graylog:
