@@ -743,7 +743,123 @@ services:
         limits:
           cpus: '0.3'
           memory: 500m
+  mongodb:
+    container_name: mongo
+    image: mongo:6.0.4
+    volumes:
+      - /mnt/nvme/tns-docker-apps/mongodb_data:/data/db
+    restart: "unless-stopped"
+    environment:
+      # Change this to your time zone, valid time zones can be found here: https://www.joda.org/joda-time/timezones.html
+      - TZ=Europe/Berlin
+    deploy:
+      resources:
+        limits:
+          cpus: '3'
+          memory: 2048m
+    networks:
+      - graylog  
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    environment:
+      # Change this to your time zone, valid time zones can be found here: https://www.joda.org/joda-time/timezones.html
+      - TZ=Europe/Berlin
+      - http.host=0.0.0.0
+      - transport.host=localhost
+      - network.host=0.0.0.0
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    restart: "unless-stopped"
+    deploy:
+      resources:
+        limits:
+          cpus: '3'
+          memory: 1024m
+    networks:
+      - graylog
+  graylog:
+    container_name: graylog
+    image: graylog/graylog:5.0.2
+    volumes:
+      - /mnt/nvme/tns-docker-apps/graylog_data:/usr/share/graylog/data
+    env_file: /mnt/nvme/dockerInDocker/graylog.env
+    deploy:
+      resources:
+        limits:
+          cpus: '5'
+          memory: 4G
+    environment:
+      # Change these to your time zone, valid time zones can be found here: https://www.joda.org/joda-time/timezones.html
+      - TZ=Europe/Berlin
+      - ROOT_TIMEZONE=Europe/Berlin
+      - GRAYLOG_TIMEZONE=Europe/Berlin
+      # CHANGE ME (must be at least 16 characters)! This is not your password, this is meant for salting the password below.
+      #GRAYLOG_PASSWORD_SECRET set in env_file
+      # Username is "admin"
+      # Password is "admin", change this to your own hashed password. 'echo -n "password" | sha256sum' 
+      #GRAYLOG_ROOT_PASSWORD_SHA2 set in env_file
+      - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:9000/
+    networks:
+      - graylog
+    depends_on:
+      - mongodb
+      - elasticsearch
+    ports:
+      # Graylog web interface and REST API
+      - 9000:9000
+      # Syslog UDP
+      - 1514:1514/udp
+      # Syslog TCP Optional
+      #- 1514:1514
+    restart: "unless-stopped"
+  influxdb:
+    container_name: influxdb
+    image: influxdb:2.6.1
+    deploy:
+      resources:
+        limits:
+          cpus: '3'
+          memory: 2048m
+    ports:
+      - '8086:8086'
+    volumes:
+      - /mnt/nvme/tns-docker-apps/influxdb2_data:/var/lib/influxdb2
+    environment:
+      # Change this to your time zone, valid time zones can be found here: https://www.joda.org/joda-time/timezones.html
+      - TZ=Europe/Berlin
+    restart: "unless-stopped"
+    networks:
+      - graylog
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:9.2.10
+    ports:
+      - '3000:3000'
+    deploy:
+      resources:
+        limits:
+          cpus: '6'
+          memory: 4G
+    volumes:
+      - /mnt/nvme/tns-docker-apps/grafana_data:/var/lib/grafana
+    depends_on:
+      - influxdb
+    env_file: /mnt/nvme/dockerInDocker/grafana.env
+    environment:
+      # Change this to your time zone, valid time zones can be found here: https://www.joda.org/joda-time/timezones.html
+      - TZ=Europe/Berlin
+      # Change these
+      #GF_SECURITY_ADMIN_USER set in grafana.env
+      #GF_SECURITY_ADMIN_PASSWORD set in grafana.env
+      - GF_INSTALL_PLUGINS=grafana-worldmap-panel
+    restart: "unless-stopped"
+    networks:
+      - graylog
 
 networks:
   app-network:
+    driver: bridge
+  graylog:
     driver: bridge
