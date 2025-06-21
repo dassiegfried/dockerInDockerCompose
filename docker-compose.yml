@@ -827,6 +827,7 @@ services:
       - '8086:8086'
     volumes:
       - /mnt/nvme/tns-docker-apps/influxdb2_data:/var/lib/influxdb2
+      - /var/run/docker.sock:/var/run/docker.sock
     environment:
       # Change this to your time zone, valid time zones can be found here: https://www.joda.org/joda-time/timezones.html
       - TZ=Europe/Berlin
