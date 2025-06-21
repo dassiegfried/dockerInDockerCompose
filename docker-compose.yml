@@ -763,7 +763,7 @@ services:
     container_name: elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2
     volumes:
-      - es_data:/usr/share/elasticsearch/data
+      - /mnt/nvme/tns-docker-apps/elasticsearch_data:/usr/share/elasticsearch/data
     environment:
       # Change this to your time zone, valid time zones can be found here: https://www.joda.org/joda-time/timezones.html
       - TZ=Europe/Berlin
