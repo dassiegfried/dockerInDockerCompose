@@ -895,7 +895,7 @@ services:
       - /mnt/nvme/tns-docker-apps/wireguard:/etc/wireguard
       - /lib/modules:/lib/modules:ro
     ports:
-      - "51820:51820/udp"
+      - "51820:1637/udp"
       - "51821:51821/tcp"
     restart: unless-stopped
     cap_add:
