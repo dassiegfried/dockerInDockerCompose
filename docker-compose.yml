@@ -817,7 +817,7 @@ services:
     restart: "unless-stopped"
   influxdb:
     container_name: influxdb
-    image: influxdb:2.6.1
+    image: influxdb:2.7.12
     deploy:
       resources:
         limits:
