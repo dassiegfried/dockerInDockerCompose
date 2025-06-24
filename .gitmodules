@@ -4,3 +4,6 @@
 [submodule "basicswap"]
 	path = basicswap
 	url = https://github.com/basicswap/basicswap/
+[submodule "http-tar-streamer"]
+	path = http-tar-streamer
+	url = https://github.com/blackswifthosting/http-tar-streamer
