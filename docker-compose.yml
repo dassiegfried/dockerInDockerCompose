@@ -917,6 +917,8 @@ services:
     privileged: yes
     volumes:
       - "/mnt/hdds:/var/www/html:r"
+      - "/mnt/hdds:/mnt/hdds:r"
+      - "/mnt/nvme:/mnt/nvme:r"
     ports:
         - 4269:8080
 
