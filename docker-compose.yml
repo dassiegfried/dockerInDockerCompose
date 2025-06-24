@@ -896,7 +896,7 @@ services:
       - /lib/modules:/lib/modules:ro
     ports:
       - "1637:1637/udp"
-      - "51821:51821/tcp"
+      - "127.0.0.1:51821:51821/tcp"
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
@@ -908,6 +908,17 @@ services:
       - net.ipv6.conf.all.disable_ipv6=0
       - net.ipv6.conf.all.forwarding=1
       - net.ipv6.conf.default.forwarding=1
+
+  http-tar:
+    container_name: http-tar
+    build:
+        context: ./http-tar-streamer
+    user: 0:0
+    privileged: yes
+    volumes:
+      - /mnt/hdds:/mnt/hdds
+    ports:
+        - 4269:8080
 
 networks:
   wg:
