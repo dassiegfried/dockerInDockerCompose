@@ -590,6 +590,8 @@ services:
       - 10095:10095
       - "9117:9117"
       - "35412:80"
+      - 8191:8191
+
     restart: always
     volumes:
       - /mnt/nvme/tns-docker-apps/gluetun-jackett:/gluetun
@@ -624,6 +626,13 @@ services:
         limits:
           cpus: '6'
           memory: 1G
+  flaresolverr:
+      network_mode: "service:gluetun-jackett"
+      container_name: flaresolverr
+      environment:
+          - LOG_LEVEL=info
+      restart: unless-stopped
+      image: ghcr.io/flaresolverr/flaresolverr:latest
 
   speedtest-tracker-gluetun:
     image: lscr.io/linuxserver/speedtest-tracker:latest
@@ -921,15 +930,8 @@ services:
       - "/mnt/nvme:/mnt/nvme:r"
     ports:
         - 4269:8080
-        
-  flaresolverr:
-      container_name: flaresolverr
-      ports:
-          - 8191:8191
-      environment:
-          - LOG_LEVEL=info
-      restart: unless-stopped
-      image: ghcr.io/flaresolverr/flaresolverr:latest
+
+
 networks:
   wg:
     driver: bridge
