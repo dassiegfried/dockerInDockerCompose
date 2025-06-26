@@ -921,7 +921,15 @@ services:
       - "/mnt/nvme:/mnt/nvme:r"
     ports:
         - 4269:8080
-
+        
+  flaresolverr:
+      container_name: flaresolverr
+      ports:
+          - 8191:8191
+      environment:
+          - LOG_LEVEL=info
+      restart: unless-stopped
+      image: ghcr.io/flaresolverr/flaresolverr:latest
 networks:
   wg:
     driver: bridge
