@@ -991,6 +991,19 @@ services:
     depends_on:
       - db-next
       - redis
+  imaginary:
+    image: h2non/imaginary:latest
+    # optionally mount a volume as local image source
+    networks:
+      nc-network:
+        ipv4_address: 172.16.21.7
+    environment:
+       PORT: 9000
+    command: -enable-url-source -mount /mnt/data
+    ports:
+      - "9000:9000"
+    depends_on:
+      - app
 
 networks:
   wg:
