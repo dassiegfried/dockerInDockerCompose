@@ -998,10 +998,10 @@ services:
       nc-network:
         ipv4_address: 172.16.21.7
     environment:
-       PORT: 9000
+       PORT: 9003
     command: -enable-url-source -mount /mnt/data
     ports:
-      - "9000:9000"
+      - "9003:9003"
     depends_on:
       - app
 
