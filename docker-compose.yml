@@ -921,6 +921,7 @@ services:
   db-next:
     # Note: Check the recommend version here: https://docs.nextcloud.com/server/latest/admin_manual/installation/system_requirements.html#server
     image: postgres:alpine
+    container_name: ncdb
     restart: always
     volumes:
       - /mnt/nvme/nextcloud/posgres:/var/lib/postgresql/data:Z
@@ -936,6 +937,7 @@ services:
   app:
     image: nextcloud:fpm-alpine
     restart: always
+    container_name: ncapp
     volumes:
       - /mnt/hdds/storj/nextcloud/ncData/html:/var/www/html:z
       # NOTE: The `volumes` config of the `cron` and `app` containers must match
@@ -953,6 +955,7 @@ services:
   web:
     image: nginx:alpine-slim
     restart: always
+    container_name: ncweb
     ports:
       - 9001:80
     volumes:
