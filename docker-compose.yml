@@ -942,7 +942,7 @@ services:
       - /mnt/hdds/storj/nextcloud/ncData/html:/var/www/html:z
       # NOTE: The `volumes` config of the `cron` and `app` containers must match
     environment:
-      - POSTGRES_HOST=db
+      - POSTGRES_HOST=ncdb
       - REDIS_HOST=redis
     env_file:
       - /mnt/nvme/dockerInDocker/postgres-nextcloud.env
