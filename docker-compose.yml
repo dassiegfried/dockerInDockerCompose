@@ -953,6 +953,8 @@ services:
     environment:
       - POSTGRES_HOST=ncdb
       - REDIS_HOST=redis
+      - PHP_MEMORY_LIMIT=8192M
+      - PHP_UPLOAD_LIMIT=99999M
     env_file:
       - /mnt/nvme/dockerInDocker/postgres-nextcloud.env
     depends_on:
