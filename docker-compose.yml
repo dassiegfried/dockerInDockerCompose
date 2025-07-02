@@ -922,7 +922,8 @@ services:
     # Note: Check the recommend version here: https://docs.nextcloud.com/server/latest/admin_manual/installation/system_requirements.html#server
     image: postgres:13.21-alpine3.22
     networks:
-      - nc-network
+      nc-network:
+        ipv4_address: 172.16.21.4
     container_name: ncdb
     restart: always
     volumes:
@@ -935,15 +936,17 @@ services:
   redis:
     image: redis:alpine
     networks:
-      - nc-network
+      nc-network:
+        ipv4_address: 172.16.21.3
     restart: always
 
   app:
     image: nextcloud:fpm-alpine
     restart: always
-    container_name: ncapp
     networks:
-      - nc-network
+      nc-network:
+        ipv4_address: 172.16.21.2
+    container_name: ncapp
     volumes:
       - /mnt/hdds/storj/nextcloud/ncData/html:/var/www/html:z
       # NOTE: The `volumes` config of the `cron` and `app` containers must match
@@ -963,7 +966,8 @@ services:
     restart: always
     container_name: ncweb
     networks:
-      - nc-network
+      nc-network:
+        ipv4_address: 172.16.21.5
     ports:
       - 9001:80
     volumes:
@@ -982,7 +986,8 @@ services:
       # NOTE: The `volumes` config of the `cron` and `app` containers must match
     entrypoint: /cron.sh
     networks:
-      - nc-network
+      nc-network:
+        ipv4_address: 172.16.21.6
     depends_on:
       - db-next
       - redis
@@ -999,6 +1004,10 @@ networks:
   
   nc-network:
     driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.21.0/24
   app-network:
     driver: bridge
   graylog:
