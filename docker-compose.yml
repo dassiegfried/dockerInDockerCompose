@@ -754,7 +754,7 @@ services:
           memory: 500m
   mongodb:
     container_name: mongo
-    image: mongo:6.0.4
+    image: mongo:8.0.11
     volumes:
       - /mnt/nvme/tns-docker-apps/mongodb_data:/data/db
     restart: "unless-stopped"
