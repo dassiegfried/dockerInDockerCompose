@@ -602,7 +602,7 @@ services:
           cpus: '6'
           memory: 6G
   jackett:
-    image: ghcr.io/linuxserver/jackett:0.22.2097
+    image: ghcr.io/linuxserver/jackett:0.22.2125
     container_name: jackett
     network_mode: "service:gluetun-jackett"
     healthcheck:
