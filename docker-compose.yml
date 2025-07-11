@@ -920,7 +920,7 @@ services:
 
   db-next:
     # Note: Check the recommend version here: https://docs.nextcloud.com/server/latest/admin_manual/installation/system_requirements.html#server
-    image: postgres:13.21-alpine3.22
+    image: postgres:17.5-alpine3.22
     networks:
       nc-network:
         ipv4_address: 172.16.21.4
