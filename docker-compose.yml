@@ -635,7 +635,7 @@ services:
       image: ghcr.io/flaresolverr/flaresolverr:v3.3.25
 
   speedtest-tracker-gluetun:
-    image: lscr.io/linuxserver/speedtest-tracker:1.6.3
+    image: lscr.io/linuxserver/speedtest-tracker:1.6.4
     container_name: speed-glue
     network_mode: "service:gluetun-jackett"
     environment:
@@ -663,7 +663,7 @@ services:
       - /mnt/nvme/tns-docker-apps/speed-jackett/config:/config
     restart: unless-stopped
   speedtest-tracker:
-    image: lscr.io/linuxserver/speedtest-tracker:1.6.3
+    image: lscr.io/linuxserver/speedtest-tracker:1.6.4
     container_name: speed
     environment:
       - PUID=1000
