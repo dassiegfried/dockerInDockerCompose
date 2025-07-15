@@ -588,6 +588,7 @@ services:
       - /dev/net/tun:/dev/net/tun
     ports:
       - 10095:10095
+      - 10096:10096
       - "9117:9117"
       - "35412:80"
       - 8191:8191
@@ -710,6 +711,30 @@ services:
       - /mnt/hdds/media:/jellyMedia
       - /mnt/nvme/qbtTmp:/qbtTmp
       - /mnt/nvme/tns-docker-apps/qbt/config:/config
+    deploy:
+      resources:
+        limits:
+          cpus: '10'
+          memory: 20G
+  qbt2:
+    image: ghcr.io/onedr0p/qbittorrent:5.0.4
+    container_name: qbt2
+    network_mode: "service:gluetun-jackett"
+    restart: always
+    user: 568:568
+    environment:
+      - TZ="Europe/Berlin"
+      - UMASK="0022"
+      - UMASK_SET="0022"
+      - NVIDIA_VISIBLE_DEVICES="void"
+      - S6_READ_ONLY_ROOT="1"
+      - QBITTORRENT__PORT="10096"
+      - QBT_Preferences__WebUI__Address="*"
+      - QBT_TORRENTING_PORT="21057"
+    volumes:
+      - /mnt/hdds/media:/jellyMedia
+      - /mnt/nvme/qbt2Tmp:/qbtTmp
+      - /mnt/nvme/tns-docker-apps/qbt2/config:/config
     deploy:
       resources:
         limits:
