@@ -602,6 +602,26 @@ services:
         limits:
           cpus: '6'
           memory: 6G
+  gluetun-qbt2:
+    image: tccr.io/tccr/gluetun:v3.40.0
+    container_name: gluetun2qbt
+    # line above must be uncommented to allow external containers to connect.
+    # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/connect-a-container-to-gluetun.mdexternal-container-to-gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      - 10096:10096
+    restart: always
+    volumes:
+      - /mnt/nvme/tns-docker-apps/gluetun-qbt2:/gluetun
+    env_file: /mnt/nvme/dockerInDocker/gluetun-qbt2-wg.env
+    deploy:
+      resources:
+        limits:
+          cpus: '6'
+          memory: 6G
   jackett:
     image: ghcr.io/linuxserver/jackett:0.22.2154
     container_name: jackett
@@ -719,7 +739,7 @@ services:
   qbt2:
     image: ghcr.io/onedr0p/qbittorrent:5.0.4
     container_name: qbt2
-    network_mode: "service:gluetun-jackett"
+    network_mode: "service:gluetun-qbt2"
     restart: always
     user: 568:568
     environment:
