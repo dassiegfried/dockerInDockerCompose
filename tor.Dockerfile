@@ -1,4 +1,4 @@
-FROM alpine:3.22.0
+FROM alpine:3.22.1
 
 # Note: Tor is only in testing repo
 RUN apk update && apk add \
