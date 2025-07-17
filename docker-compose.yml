@@ -712,7 +712,7 @@ services:
           memory: 500m
     restart: unless-stopped
   qbt:
-    image: ghcr.io/onedr0p/qbittorrent:5.0.4
+    image: ghcr.io/home-operations/qbittorrent:5.1.2
     container_name: qbt
     network_mode: "service:gluetun-jackett"
     restart: always
@@ -736,7 +736,7 @@ services:
           cpus: '10'
           memory: 20G
   qbt2:
-    image: ghcr.io/onedr0p/qbittorrent:5.0.4
+    image: ghcr.io/home-operations/qbittorrent:5.1.2
     container_name: qbt2
     network_mode: "service:gluetun-qbt2"
     restart: always
