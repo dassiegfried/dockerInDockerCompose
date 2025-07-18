@@ -1,5 +1,5 @@
 # Pull base image.
-FROM jlesage/baseimage-gui:debian-10-v4
+FROM jlesage/baseimage-gui:debian-10-v4@sha256:ea2890ec33d4c4524cef0a0d059a21fd32d58ac23518dc0359845547f45b6b91
 
 ENV USER_ID=0 GROUP_ID=0 TERM=xterm
 
