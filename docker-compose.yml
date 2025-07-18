@@ -835,7 +835,7 @@ services:
       - graylog
   graylog:
     container_name: graylog
-    image: graylog/graylog:5.0.2@sha256:ceda60c2078e5d38fe12cd7b3f56f1321f74cc873de70c4b7120649b4862fc69
+    image: graylog/graylog:5.2.12@sha256:3f4aa0885cd3e30442e5f7e1b2361f57773831bb84515386eb5dfa6f426fc1d7
     volumes:
       - graylog_data:/usr/share/graylog/data
     env_file: /mnt/nvme/dockerInDocker/graylog.env
