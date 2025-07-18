@@ -1,4 +1,4 @@
-FROM alpine:3.22.0
+FROM alpine:3.22.1@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1
 
 # Note: Tor is only in testing repo
 RUN apk update && apk add \
