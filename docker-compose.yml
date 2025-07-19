@@ -1230,7 +1230,7 @@ services:
           create_host_path: False
           propagation: rprivate
         read_only: False
-        source: /mnt/nvme/tns-docker-apps/unmanic/cache
+        source: /mnt/hdds/tns-docker-apps/unmanic/cache
         target: /tmp/unmanic
         type: bind
 
