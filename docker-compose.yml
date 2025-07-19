@@ -1,4 +1,4 @@
-version: '3.5'
+version: '2.4'
 services:
   mediathekview:
     build:
@@ -1115,6 +1115,124 @@ services:
       - "3000:${PAPERLESS_AI_PORT:-3000}"
     volumes:
       - /mnt/nvme/tns-docker-apps/paperless-ai_data:/app/data
+  unmanic:
+    cap_add:
+      - CHOWN
+      - DAC_OVERRIDE
+      - FOWNER
+      - SETGID
+      - SETUID
+    cap_drop:
+      - ALL
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 10G
+    container_name: unmanic
+    devices:
+      - /dev/dri:/dev/dri
+    environment:
+      GID: '568'
+      GROUP_ID: '568'
+      PGID: '568'
+      PUID: '568'
+      TZ: Europe/Berlin
+      UID: '568'
+      UMASK: '002'
+      UMASK_SET: '002'
+      USER_ID: '568'
+    group_add:
+      - 44
+      - 107
+      - 568
+    healthcheck:
+      interval: 30s
+      retries: 5
+      start_interval: 2s
+      start_period: 15s
+      test: >-
+        curl --request GET --silent --output /dev/null --show-error --fail
+        http://127.0.0.1:8888/unmanic/api/v2/version/read
+      timeout: 5s
+    image: josh5/unmanic:0.3.0
+    platform: linux/amd64
+    ports:
+      - mode: ingress
+        protocol: tcp
+        published: 30123
+        target: 8888
+    privileged: False
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges=true
+    stdin_open: False
+    tty: False
+    blkio_config:
+        device_write_bps:
+            - path: /dev/sda
+              rate: 20mb  
+            - path: /dev/sdb
+              rate: 20mb 
+            - path: /dev/sdc
+              rate: 20mb  
+            - path: /dev/sdd
+              rate: 20mb  
+            - path: /dev/sde
+              rate: 20mb  
+            - path: /dev/sdi
+              rate: 20mb
+            - path: /dev/sdj
+              rate: 20mb
+            - path: /dev/sdk
+              rate: 20mb
+            - path: /dev/nvme0n1
+              rate: 20mb
+            - path: /dev/nvme0n1
+              rate: 20mb
+        device_read_bps:
+            - path: /dev/sda
+              rate: 20mb  
+            - path: /dev/sdb
+              rate: 20mb 
+            - path: /dev/sdc
+              rate: 20mb  
+            - path: /dev/sdd
+              rate: 20mb  
+            - path: /dev/sde
+              rate: 20mb  
+            - path: /dev/sdi
+              rate: 20mb
+            - path: /dev/sdj
+              rate: 20mb
+            - path: /dev/sdk
+              rate: 20mb
+            - path: /dev/nvme0n1
+              rate: 20mb
+            - path: /dev/nvme0n1
+              rate: 20mb
+    volumes:
+      - bind:
+          create_host_path: False
+          propagation: rprivate
+        read_only: False
+        source: /mnt/nvme/tns-docker-apps/unmanic/config
+        target: /config
+        type: bind
+      - bind:
+          create_host_path: False
+          propagation: rprivate
+        read_only: False
+        source: /mnt/hdds/media
+        target: /library
+        type: bind
+      - bind:
+          create_host_path: False
+          propagation: rprivate
+        read_only: False
+        source: /mnt/nvme/tns-docker-apps/unmanic/cache
+        target: /tmp/unmanic
+        type: bind
 
 networks:
   wg:
