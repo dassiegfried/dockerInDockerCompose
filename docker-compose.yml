@@ -1190,12 +1190,6 @@ services:
               rate: 20mb
             - path: /dev/nvme0n1
               rate: 20mb
-            - path: /mnt/nvme/tns-docker-apps/unmanic/config
-              rate: 20mb
-            - path: /mnt/nvme/tns-docker-apps/unmanic/cache
-              rate: 20mb
-            - path: /mnt/hdds/media
-              rate: 20mb
         device_read_bps:
             - path: /dev/sda
               rate: 20mb  
@@ -1216,12 +1210,6 @@ services:
             - path: /dev/nvme0n1
               rate: 20mb
             - path: /dev/nvme0n1
-              rate: 20mb
-            - path: /mnt/nvme/tns-docker-apps/unmanic/config
-              rate: 20mb
-            - path: /mnt/nvme/tns-docker-apps/unmanic/cache
-              rate: 20mb
-            - path: /mnt/hdds/media
               rate: 20mb
     volumes:
       - bind:
