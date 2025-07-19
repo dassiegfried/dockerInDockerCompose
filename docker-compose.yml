@@ -1025,7 +1025,7 @@ services:
       - app
 
   cron:
-    image: nextcloud:31.0.7-fpm-alpinesha256:5462723d740ed0db653f2192bd72f291e47a159dc0ca639f7075553eab6d3947
+    image: nextcloud:31.0.7-fpm-alpine@sha256:5462723d740ed0db653f2192bd72f291e47a159dc0ca639f7075553eab6d3947
     restart: always
     volumes:
       - /mnt/hdds/storj/nextcloud/ncData/html:/var/www/html:z
