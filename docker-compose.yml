@@ -622,7 +622,7 @@ services:
           cpus: '6'
           memory: 6G
   jackett:
-    image: ghcr.io/linuxserver/jackett:0.22.2178@sha256:48485e86447a90c54c23a28fb48901b2ddca7142a04b95e423b803888f803415
+    image: ghcr.io/linuxserver/jackett:0.22.2182@sha256:e7f4cde24896c0cb84de87b761754c5e5460a5c1e133e779431a3c0a89db0f0a
     container_name: jackett
     network_mode: "service:gluetun-jackett"
     healthcheck:
