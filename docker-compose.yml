@@ -150,7 +150,7 @@ services:
       - "--ban-list=/home/monero/monero-ban-list/ban_list.txt"
 
   db:
-    image: mysql:8.4@sha256:679e7e924f38a3cbb62a3d7df32924b83f7321a602d3f9f967c01b3df18495d6
+    image: mysql:8.4@sha256:d2c60b1b225c6d7845f0abdb596fc35c2d4122bcad6ec219588035a118f75d93
     container_name: db
     restart: unless-stopped
     env_file: /mnt/nvme/dockerInDocker/wordpress/.env
