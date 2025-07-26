@@ -591,6 +591,7 @@ services:
       - "9117:9117"
       - "35412:80"
       - 8191:8191
+      - 9696:9696
 
     restart: always
     volumes:
