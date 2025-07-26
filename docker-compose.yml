@@ -623,7 +623,7 @@ services:
           memory: 6G
   prowlarr:
     container_name: prowlarr
-    image: ghcr.io/hotio/prowlarr
+    image: ghcr.io/hotio/prowlarr@sha256:37c1e95c5015db2b22fa0beafc53c3bf60d57c6cf8e27b7626f067e8a2f09941
     network_mode: "service:gluetun-jackett"
     environment:
       - PUID=1000
